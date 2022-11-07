@@ -3,36 +3,34 @@
 
 void getArray()
 {
-    printf("Enter the size of array you want: ");
+    printf("Enter the size of array you want: "); 
     int n;
-    scanf("%d", &n);
+    scanf("%d", &n);   /*Accepts int input from user to set array size*/
     int arr[n];
 
-    for(int i = 0; i<n; i++)
+    for(int i = 0; i<n; i++)   /*Accepts n elements from user to make array*/
     {
         printf("Enter number: ");
         scanf("%d", &arr[i]);
     } 
 
-    int max, index;
-    for(int i=0; i<n; i++)
+int min = 0, temp = 0;
+for(int i=0; i<n-1; i++)   /*Outer loop: Starts shifting boundary of array to set minimum elements and lock*/
+{
+    for(int j = i+1; j<n; j++) /*Inner loop: Finds the minimum element to set at position i, finding the ith smallest element*/
     {
-        for(int j=n-i-1;j>=0;j--)
+        min = i;
+        if(arr[j]<arr[min])  
         {
-         max=0, index = 0;
-            if(arr[j]>max)
-            {
-            max = arr[j];
-            index = j;
-            }
+            min = j;
         }
-        int temp = arr[index];
-        arr[index] = arr[n-i-1];
-        arr[n-i] = temp;
+        temp = arr[i];    /*swaps the minimum element and element with i position*/
+        arr[i] = arr[min];
+        arr[min] = temp;
     }
-
+}
     
- for(int i = 0; i<n; i++)
+ for(int i = 0; i<n; i++)   /*prints sorted array*/
     {
         printf("%d, ", arr[i]);
     }
