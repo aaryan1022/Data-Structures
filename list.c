@@ -28,7 +28,7 @@ void createList()
    
    address head = malloc(sizeof(struct Node));     /*allocates space for the node at the specific address*/
    printf("Enter number: ");
-    scanf("%d\n", & head->val);   /*Gets the value of first node from user*/
+    scanf("%d", & head->val);   /*Gets the value of first node from user*/
     address s = head;
 
     int i = 1;
@@ -37,7 +37,7 @@ void createList()
         printf("Enter number: ");   
         s->next =  malloc(sizeof(struct Node));    /*assigns the address of the next node*/
         s=s->next;
-        scanf("%d \n", &s->val);  /*Takes the value for the next node*/
+        scanf("%d", &s->val);  /*Takes the value for the next node*/
         i++;
     }
 
