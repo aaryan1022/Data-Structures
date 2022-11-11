@@ -10,16 +10,13 @@ int main()
         struct Node* next;
     };
     typedef struct Node* address;
-    address x;
-    x = malloc(sizeof(struct Node));
-    address a = x;
+    address x;  
 
 
-
-    int arr[] = {};
     printf("enter size of linked list: ");
     int n;
     scanf("%d", &n);
+    int arr[n];
     for(int i=0; i<n;i++)
     {
         printf("enter number: ");
@@ -27,11 +24,14 @@ int main()
     }
     
 
-    for(int i=0; i<n; i++)
+    x = malloc(sizeof(struct Node));
+    x->val = arr[0];
+    address a = x;
+    for(int i=1; i<n; i++)
     {
-        a->val = arr[i];
+        a->next = malloc(sizeof(struct Node));
         a = a->next;
-        a = malloc(sizeof(struct Node));
+        a->val = arr[i];
     }
 
 
