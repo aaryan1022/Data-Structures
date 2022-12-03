@@ -29,18 +29,14 @@ address search(address root, int val )
     
 }
 
-void create(address root, int val)
-{
-    root = malloc(sizeof(struct node));
-    root->val = val;
-}
 
-address insert(address root, int val)
+void insert(address root, int val)
 {
     if(root == NULL)
     {
-        create(root, val);
-        return root;
+         root = malloc(sizeof(struct node));
+         root->val = val;
+        return;
     }
 
     else if(val > root->val)
@@ -48,19 +44,23 @@ address insert(address root, int val)
         if(root->right)
             insert(root->right, val);
         else
-            create(root->right, val);
+        { 
+        root->right = malloc(sizeof(struct node));
+        root->right->val = val;
+        }
+            
     }
 
     else if(val < root->val)
     {
         if(root->left)
             insert(root->left, val);
-        else
-            create(root->left, val);
+        else{
+             root->left = malloc(sizeof(struct node));
+             root->left->val = val;
+        }
     }
 
-    
-        return root;
 }
 
 void inorder(address root)
@@ -79,10 +79,6 @@ void inorder(address root)
     }
 }
 
-void delete(address d)
-{
-    d = NULL;   
-}
 
 
 int main()
@@ -90,52 +86,28 @@ int main()
     int n;
     printf("enter the size of array, that will be made into a binary tree.");
     scanf("%d", &n);
-    int arr[n];
+    int* arr = malloc(n*sizeof(int));
     for(int i = 0; i<n; i++)
     {
         printf("enter number: ");
-        scanf("%d", &arr[n]);
+        scanf("%d", &arr[i]);
     }
 
-       for(int i = 0; i<n; i++)
+    /*  for(int i = 0; i<n; i++)
     {
         printf("%d, ", arr[i]);
-    }
+    }*/ 
 
     address root = malloc(sizeof(struct node));
+    root->val = arr[0];
 
-    for(int i=0; i<n; i++)
+    for(int i=1; i<n; i++)
     {
-        if(i == 0)
-        {
-            root->val = arr[i];
-        }
         insert(root, arr[i]);
     }
     
     inorder(root);
+   // printf("%d", root->right->val);
 
-/*
-    int k;
-    printf("Do you want to delete any value? 1/0 : ");
-    scanf("%s", &k);
-
-    if(k==1)
-    {
-        int d;
-        printf("enter value to delete: ");
-        scanf("%d ", &d);
-
-        if(search(root, d))
-        {
-            address d = search(root, d);
-            delete(d);
-        }
-        else
-        {
-            printf("element does not exist");
-    }
-    }
-*/
     return 0;
 }
