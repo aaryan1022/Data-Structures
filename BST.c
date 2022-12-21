@@ -79,6 +79,59 @@ void inorder(address root)
     }
 }
 
+address min(address node)
+{
+    address current = node;
+ 
+ 
+    while (current && current->left != NULL)
+        current = current->left;
+ 
+    return current;
+}
+ 
+
+address delete(address head, int val)
+{
+
+    address root = head;
+    int key = val;
+    
+    if (root == NULL)
+        return root;
+ 
+    if (key < root->key)
+        root->left = delete(root->left, key);
+ 
+   
+    else if (key > root->key)
+        root->right = delete(root->right, key);
+ 
+  
+    else {
+
+        if (root->left == NULL) {
+            struct node* temp = root->right;
+            free(root);
+            return temp;
+        }
+        else if (root->right == NULL) {
+            address temp = root->left;
+            free(root);
+            return temp;
+        }
+ 
+       
+        address temp = min(root->right);
+ 
+        
+        root->key = temp->key;
+ 
+     
+        root->right = delete(root->right, temp->key);
+    }
+    return root;
+}
 
 
 int main()
@@ -107,6 +160,7 @@ int main()
     }
     
     inorder(root);
+    delete(root, 5);
    // printf("%d", root->right->val);
 
     return 0;
